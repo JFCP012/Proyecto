@@ -1,0 +1,25 @@
+.button-container {
+    display: flex; /* Centra los botones */
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 20px; /* Aumenta la separación entre botones */
+  }
+  
+  
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  

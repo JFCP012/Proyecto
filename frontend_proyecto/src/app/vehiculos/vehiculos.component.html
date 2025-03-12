@@ -1,0 +1,21 @@
+<p>Lista de vehículos</p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Color</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+ <tbody>
+  <tr *ngFor="let item of vehiculos">
+    <td>{{item.placa}}</td>
+    <td>{{item.color}}</td>
+    <td>{{item.valorVehiculo}}</td>
+  </tr>
+</tbody>
+
+</table>
+
+<button type="button" (click)="actualizar()">Actualizar </button>
