@@ -1,24 +1,44 @@
-<p>Lista de vehículos</p>
+<button class="btn btn-primary" (click)="abrirsesion()">Gestionar Alquiler</button>
+<p class="h2 text-center text-primary fw-bold mt-4">
+  🚗 Lista de Vehículos No Entregados
+</p>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Placa</th>
-      <th>Color</th>
-      <th>Valor</th>
-      <th>estado</th>
-      <th>tipo</th>
-    </tr>
-  </thead>
- <tbody>
-  <tr *ngFor="let item of vehiculos">
-    <td>{{item.placa}}</td>
-    <td>{{item.color}}</td>
-    <td>{{item.valorVehiculo}}</td>
-    <td>{{item.estado}}</td>
-    <td>{{item.tipo}}</td>
-  </tr>
-</tbody>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <label for="tipo" class="form-label fw-bold text-secondary">
+        📌 Vehículos en estado "No Entregado":
+      </label>
+    </div>
+  </div>
+</div>
 
-</table>
-
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered shadow-lg rounded">
+      <thead class="table-dark text-center">
+        <tr>
+          <th># Alquiler</th>
+          <th>Valor Alquiler</th>          
+          <th>N° Identificación</th>
+          <th>Fecha Solicitud</th>
+          <th>Placa</th>
+          <th>Estado auto</th>
+          <th>Estado alquiler</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of alquiler" class="text-center align-middle table-light">
+          <td><strong>{{ item.idAl }}</strong></td>
+          <td class="text-success fw-bold">${{ item.valorFinal| number }}</td>
+          <td>{{ item.usuario.cedula }}</td>
+          <td>{{ item.fecha| date:'longDate' }}</td>
+          <td class="fw-bold text-uppercase">{{ item.vehiculo.placa }}</td>
+          <td>{{item.vehiculo.estado}}</td>
+          <td>{{item.estadoAl}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

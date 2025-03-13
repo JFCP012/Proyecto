@@ -1,46 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { VehiculosService } from './../servicios/vehiculos.service';
 import { Component, OnInit } from '@angular/core';
-import { Vehiculos } from '../entidades/vehiculos';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // ✅ Importar Router
+import { Alquiler } from '../entidades/alquiler';
 
 @Component({
   selector: 'app-vehiculos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule], // ✅ Eliminado CommonModule duplicado
   templateUrl: './vehiculos.component.html',
-  styleUrls: ['./vehiculos.component.css'] // ✅ Corrección: `styleUrls`
+  styleUrls: ['./vehiculos.component.css']
 })
-export class VehiculosComponent implements OnInit  {
-  vehiculos: Vehiculos[];
+export class VehiculosComponent implements OnInit {
+  alquiler: Alquiler[] = []; // ✅ Inicialización para evitar `undefined`
 
-
+  constructor(
+    private vehiculosService: VehiculosService,
+    private router: Router // ✅ Agregado `Router` al constructor
+  ) {}
 
   ngOnInit(): void {
-    this.verDisponibles(); 
+    this.verDisponibles();
   }
-  constructor(private vehiculosService: VehiculosService) {}
-  verDisponibles() {
-    this.vehiculosService.disponibles().subscribe(datos => {
-      console.log('Datos recibidos:', datos);
-      
-      // Si `datos` no es un array, lo convertimos en uno
-      if (!Array.isArray(datos)) {
-        this.vehiculos = [datos]; // 🔹 Lo convertimos en un array
-      } else {
-        this.vehiculos = datos;
-      }
+
+  verDisponibles(): void {
+    this.vehiculosService.disponiblesN().subscribe({
+      next: (datos) => {
+        console.log('Datos recibidos:', datos);
+        this.alquiler = datos;
+      },
+      error: (err) => console.error('Error al obtener datos:', err) // ✅ Manejo de errores
     });
   }
-  
-  
-  
 
-  actualizar(placa:string){
-    this.vehiculosService.gestionar(placa).subscribe(dato=>{
-      alert(dato)
-      console.log(dato)
-      window.location.reload()
-    })
+
+
+  abrirsesion(): void {
+    this.router.navigate(['./alquileres']);
   }
 }
-

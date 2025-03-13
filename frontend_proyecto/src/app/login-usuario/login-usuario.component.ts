@@ -29,7 +29,7 @@ export class LoginUsuarioComponent implements OnInit {
     this.loginUsuarioService.iniciarSesion(this.cedula,this.password).subscribe(dato => {
       console.log(dato); 
       if (dato === true) { 
-        this.router.navigate(['/vehiculos']); 
+        this.router.navigate(['/usuario']); 
       } else {
         alert("Usuario o contraseña incorrectos");
       }
