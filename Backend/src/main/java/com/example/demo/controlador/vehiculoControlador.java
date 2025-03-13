@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -25,8 +25,9 @@ public class vehiculoControlador {
 	private vehiculoRepositorio repositorio;
 	
 
-    @GetMapping("/buscarDisponibles")
-    public List<vehiculo> Disponibles() {
-    	return repositorio.findByEstado("disponible");
-    }
+	 @GetMapping("/buscarDisponibles")
+	    public List<vehiculo> Disponibles(@RequestParam("tipo") String tipo) {
+	        return repositorio.findByEstado("disponible", tipo);
+	    }
 	}
+	

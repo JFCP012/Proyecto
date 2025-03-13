@@ -14,7 +14,7 @@ import com.example.demo.repositorio.alquilerRepositorio;
 
 
 @RestController
-@RequestMapping("/ver/alquiler/")
+@RequestMapping("/ver/alquiler")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class alquilerControlador {
 	
@@ -22,26 +22,15 @@ public class alquilerControlador {
 	private alquilerRepositorio repositorio;
 
 @GetMapping("/buscarNoEntregados")
-	public List<Object>buscarNoEntregados(){
-		List<Object> vehiculosNo = new LinkedList <>();
-		List<alquiler> al = this.repositorio.findAll();
-		String estadoAl="no entregado";
-		for(int i=0;i<al.size();i++) {
-			String EstadoAl=al.get(i).getEstadoAl();
-			if(EstadoAl.equals(estadoAl)) {
-				String placa=al.get(i).getVehiculo().getPlaca();
-				String color= al.get(i).getVehiculo().getColor();
-				Long valor=al.get(i).getVehiculo().getValorVehiculo();
-				vehiculosNo.add("Placa: "+placa);
-				vehiculosNo.add("Color: "+color);
-				vehiculosNo.add("valor: "+valor);
-				return vehiculosNo;	
-			}else {
-				vehiculosNo.add("No hay vehiculos con estado no entregado");
-			}
-		}
-		return vehiculosNo;		
+	public List<alquiler>buscarNoEntregados(){
+	return repositorio.findByEstadoAl("no entregado");
 	}
+	
+	@GetMapping("/buscar")
+	public List<alquiler>buscaR(){
+		return repositorio.findAll();
+		}
+	
 
 @GetMapping ("/actualizar")
 public List<Object>Actualizar(
