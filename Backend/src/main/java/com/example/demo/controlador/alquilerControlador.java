@@ -45,7 +45,7 @@ public class alquilerControlador {
 
 @GetMapping ("/actualizar")
 public List<Object>Actualizar(
-		@RequestParam String placa){
+		@RequestParam("placa") String placa){
 	List<Object> alqA = new LinkedList <>();
 	List<alquiler> Ac = this.repositorio.findAll();
 	for(int i=0;i<Ac.size();i++) {
@@ -54,12 +54,6 @@ public List<Object>Actualizar(
         if (Placa.equals(placa) && !estadO.equals("entregado"))  {
 			Ac.get(i).setEstadoAl("entregado");
 			this.repositorio.save(Ac.get(i));
-			String estado=Ac.get(i).getEstadoAl();
-			String tipo=Ac.get(i).getVehiculo().getTipo();
-			alqA.add("Estado original: "+estadO);
-			alqA.add("Placa: "+Placa);
-			alqA.add("Estado: "+estado);
-			alqA.add("tipo: "+ tipo);
 			return alqA;
 		}if (alqA.isEmpty()) {
 	        alqA.add("Error no se encuentran vehiculos con la placa: " +placa +" en estado no entregado");

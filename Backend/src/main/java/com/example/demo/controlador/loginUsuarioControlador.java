@@ -1,7 +1,7 @@
 package com.example.demo.controlador;
 
 
-import java.util.LinkedList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +29,14 @@ public class loginUsuarioControlador {
 	
 
 	@GetMapping("/login")
-	public boolean login(@RequestParam Long cedula2, @RequestParam String clave2) {
+	public boolean login(    @RequestParam(name = "cedula2") Long cedula2,
+		    @RequestParam(name = "clave2") String clave2) {
 	    List<loginUsuario> usuarios = this.repositorio.findAll();
 	    boolean usuarioEncontrado = false;
 	    
 	    for (loginUsuario usuario : usuarios) {
 	        long cedula = usuario.getUsuario().getCedula();
 	        String clave = usuario.getClave();
-	        String nombre = usuario.getUsuario().getNombre1();
-	        
 	        if (cedula == cedula2 && clave.equals(clave2)) {
 	            usuarioEncontrado = true;
 	        }
