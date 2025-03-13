@@ -26,9 +26,8 @@ public class loginAdminControlador {
 		
 		@GetMapping("/login")
 		public boolean Login(
-				@RequestParam String usuario2,
-				@RequestParam String clave2){	
-		    List<Object> admin = new LinkedList<>();
+			    @RequestParam(name = "usuario2") String usuario2,
+			    @RequestParam(name = "clave2") String clave2){	
 			List<loginAdmin> adm = this.repositorio.findAll();
 			boolean adminEncontrado=false;
 			for(int i=0;i<adm.size();i++) {
@@ -47,5 +46,5 @@ public class loginAdminControlador {
 		}
 		
 		}
-//cambielo solo hice para que no me mostrara error
+
 
