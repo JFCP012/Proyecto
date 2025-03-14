@@ -1,8 +1,11 @@
 package com.example.demo.controlador;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,11 @@ public class alquilerControlador {
 		return repositorio.findAll();
 		}
 	
+	@GetMapping("/buscarAl")
+	public List<alquiler>buscaAl(@RequestParam(name = "cedula") Long cedula){
+		return repositorio.findbycedula(cedula);
+		}
+	
 
 @GetMapping ("/actualizar")
 public List<Object>Actualizar(
@@ -51,10 +59,10 @@ public List<Object>Actualizar(
 	return alqA;
 	}
 
-	
+
 @GetMapping ("/cancelar")
 public List<Object> cancelar(
-		@RequestParam Long id){
+		@RequestParam (name = "id") Long id){
 	List<Object> alq = new LinkedList <>();
 	 List<alquiler> Ac = this.repositorio.findAll();
 		for(int i=0;i<Ac.size();i++) {
@@ -63,7 +71,6 @@ public List<Object> cancelar(
 				Ac.get(i).getVehiculo().setEstado("disponible");
 				this.repositorio.save(Ac.get(i));
 				this.repositorio.deleteById(id);
-			alq.add("Ha sido borrado el alquiler: "+ id);
 			}if (Ac.isEmpty()) {
 		        alq.add("No se encontro un alquiler con el id: " +id);
 			}
@@ -72,18 +79,18 @@ public List<Object> cancelar(
 			}
 
 @GetMapping("/actualizarAlquiler")
-public List<Object> actualizarAlquiler(@RequestParam Long id) {
+public void actualizarAlquiler(@RequestParam(name = "id") Long id) {
     List<Object> alq = new LinkedList<>();
     List<alquiler> Ac = this.repositorio.findAll();
 
-    for (alquiler alquiler : Ac) {
-        if (alquiler.getIdAl().equals(id)) {
-            alquiler.getVehiculo().setEstado("disponible");
+    for(int i=0;i<Ac.size();i++) {
+        if (Ac.get(i).getIdAl().equals(id)) {
+            Ac.get(i).getVehiculo().setEstado("disponible");
 
             // Obtener fechas
-            Date fechaEntrega = new Date(alquiler.getFechaEnt().getTime()); // Convertir java.sql.Date a java.util.Date
+            Date fechaEntrega = new Date(Ac.get(i).getFechaEnt().getTime()); // Convertir java.sql.Date a java.util.Date
             Date fechaActual = new Date();
-            float valorVehiculo = alquiler.getVehiculo().getValorVehiculo();
+            float valorVehiculo = Ac.get(i).getVehiculo().getValorVehiculo();
 
             // Calcular diferencia de días
             long diferenciaDias = ChronoUnit.DAYS.between(
@@ -96,26 +103,13 @@ public List<Object> actualizarAlquiler(@RequestParam Long id) {
             // Calcular el valor total
             float valorTotal = valorVehiculo + montoAdicional;
 
+            Ac.get(i).setValorFinal(valorTotal);
             // Guardar cambios
-            this.repositorio.save(alquiler);
+            this.repositorio.save(Ac.get(i));
 
-            // Agregar información a la lista de respuesta
-            alq.add("Ha sido cambiado el estado del alquiler con ID: " + id);
-            alq.add("Fecha de entrega: " + fechaEntrega);
-            alq.add("Diferencia de días: " + diferenciaDias);
-            alq.add("Monto adicional: " + montoAdicional);
-            alq.add("Valor total a pagar: " + valorTotal);
-
-            return alq;
+           
         }
     }
-
-    // Si no se encuentra el ID, agregar mensaje
-    if (Ac.isEmpty()) {
-        alq.add("No se encontró un alquiler con el ID: " + id);
-    }
-
-    return alq;
     
 }
 

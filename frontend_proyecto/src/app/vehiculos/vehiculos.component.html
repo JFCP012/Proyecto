@@ -1,7 +1,17 @@
-<button class="btn btn-primary" (click)="abrirsesion()">Gestionar Alquiler</button>
+
+
 <p class="h2 text-center text-primary fw-bold mt-4">
   🚗 Lista de Vehículos No Entregados
 </p>
+
+<div class="container text-center mt-3">
+  <button class="btn btn-warning btn-lg me-2" (click)="abrirsesion()">
+    📝 Gestionar Alquiler
+  </button>
+  <button class="btn btn-success btn-lg" (click)="abrirsesion2()">
+    ✅ Ver Disponibles
+  </button>
+</div>
 
 <div class="container mt-4">
   <div class="row justify-content-center">
@@ -25,7 +35,6 @@
           <th>Placa</th>
           <th>Estado auto</th>
           <th>Estado alquiler</th>
-          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>

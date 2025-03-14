@@ -55,7 +55,7 @@ public class alquiler {
 	private Date fechaD;
 	
 	@Column(name ="valorFinal",length = 50 ,nullable=false)
-	private Long valorFinal;
+	private Float valorFinal;
 	
 	@Column(name ="estadoAl",length = 50 ,nullable=false)
 	private String estadoAl;
@@ -65,7 +65,7 @@ public class alquiler {
 	}
 
 	public alquiler(usuario usuario,vehiculo vehiculo,loginAdmin admin, Date fecha, Date fechaEnt, 
-			Date fechaD, Long valorFinal,String estadoAl) {
+			Date fechaD, Float valorFinal,String estadoAl) {
 		super();
 		this.usuario = usuario;
 		this.vehiculo = vehiculo;
@@ -133,11 +133,11 @@ public class alquiler {
 		this.fechaD = fechaD;
 	}
 
-	public Long getValorFinal() {
+	public Float getValorFinal() {
 		return valorFinal;
 	}
 
-	public void setValorFinal(Long valorFinal) {
+	public void setValorFinal(Float valorFinal) {
 		this.valorFinal = valorFinal;
 	}
 

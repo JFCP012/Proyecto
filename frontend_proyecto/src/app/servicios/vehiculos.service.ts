@@ -26,4 +26,8 @@ return this.httpClient.get(`http://localhost:8080/ver/alquiler/actualizar?placa=
   buscar():Observable<Alquiler[]>{
     return this.httpClient.get<Alquiler[]>(`http://localhost:8080/ver/alquiler/buscar`)
   }
+
+  actualizarAlquiler(id:number):Observable<object[]>{
+    return this.httpClient.get<object[]>(`http://localhost:8080/ver/alquiler/actualizarAlquiler?id=${id}`)
+  }
 }

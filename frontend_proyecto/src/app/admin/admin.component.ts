@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { VehiculosService } from '../servicios/vehiculos.service';
 import { Alquiler } from '../entidades/alquiler';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -12,11 +14,15 @@ import { Alquiler } from '../entidades/alquiler';
 })
 export class AdminComponent implements OnInit {
   Alquiler: Alquiler[]
+  recibo: object[]
+  
 
   ngOnInit(): void {
     this.buscarAlquilados()
   }
-  constructor(private vehiculosService: VehiculosService) {}
+  constructor(private vehiculosService: VehiculosService,
+    private router: Router
+  ) {}
 
 
   buscarAlquilados(){
@@ -28,11 +34,25 @@ console.log(dato)
   actualizar(placa: string): void {
     this.vehiculosService.gestionar(placa).subscribe({
       next: (dato) => {
-        alert(dato);
         console.log(dato);
         window.location.reload() // ✅ En lugar de `window.location.reload()`, actualizamos la lista
       },
       error: (err) => console.error('Error al actualizar:', err)
     });
   }
+
+  actualizarAlquiler(id: number): void {
+    this.vehiculosService.actualizarAlquiler(id).subscribe({
+      next: (dato) => {
+        console.log(dato);
+        window.location.reload() // ✅ Se actualiza la tabla sin recargar la página
+      },
+    });
+  }
+  volver():void{
+    this.router.navigate([`/vehiculos`])
+      }
+      abrirsesion2(): void {
+        this.router.navigate(['./listaDisponibles']);
+      }
 }

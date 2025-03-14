@@ -11,9 +11,7 @@ import com.example.demo.modelo.vehiculo;
 
 
 public interface vehiculoRepositorio extends JpaRepository<vehiculo,String> {
-
-
-	    @Query(value = "SELECT * FROM vehiculos v WHERE v.estado = :estado AND v.tipo = :tipo", nativeQuery = true)
+  @Query(value = "SELECT * FROM vehiculos v WHERE v.estado = :estado AND v.tipo = :tipo", nativeQuery = true)
 	    List<vehiculo> findByEstado(@Param("estado") String estado,@Param("tipo") String tipo);
 
 

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.demo.modelo.alquiler;
 import com.example.demo.modelo.vehiculo;
-
+import com.example.demo.repositorio.alquilerRepositorio;
 import com.example.demo.repositorio.vehiculoRepositorio;
 
 @RestController
@@ -25,9 +25,14 @@ public class vehiculoControlador {
 	private vehiculoRepositorio repositorio;
 	
 
+	
+	
+
 	 @GetMapping("/buscarDisponibles")
 	    public List<vehiculo> Disponibles(@RequestParam("tipo") String tipo) {
 	        return repositorio.findByEstado("disponible", tipo);
 	    }
-	}
+	    
+	    }
+
 	

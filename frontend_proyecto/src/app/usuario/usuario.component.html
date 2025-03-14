@@ -1,8 +1,15 @@
+
 <div class="container mt-4">
-  <div class="row justify-content-center">
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary btn-lg shadow-sm d-flex align-items-center" (click)="abrirsesion()">
+      <i class="bi bi-car-front-fill me-2"></i> Alquileres
+    </button>
+  </div>
+
+  <div class="row justify-content-center mt-4">
     <div class="col-md-6">
       <label for="tipo" class="form-label fw-bold">Tipo de Vehículo:</label>
-      <select class="form-select shadow-sm" [(ngModel)]="tipo" (change)="verDisponibles()">
+      <select class="form-select shadow-sm rounded-pill" [(ngModel)]="tipo" (change)="verDisponibles()">
         <option value="automovil">🚘 Automóvil</option>
         <option value="camioneta">🚙 Camioneta</option>
         <option value="campero">🚜 Campero</option>
@@ -11,33 +18,33 @@
       </select>
     </div>
   </div>
-</div>
 
-<div class="container mt-4">
-  <div class="table-responsive">
-    <table class="table table-hover table-bordered shadow-sm">
-      <thead class="table-dark text-center">
-        <tr>
-          <th>Placa</th>
-          <th>Color</th>
-          <th>Valor</th>
-          <th>Estado</th>
-          <th>Tipo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of vehiculos" class="text-center align-middle">
-          <td class="fw-bold">{{ item.placa }}</td>
-          <td>{{ item.color }}</td>
-          <td>{{ item.valorVehiculo }}</td>
-          <td>
-            <span *ngIf="item.estado === 'disponible'" class="badge bg-success">Disponible</span>
-            <span *ngIf="item.estado === 'ocupado'" class="badge bg-danger">Ocupado</span>
-            <span *ngIf="item.estado !== 'disponible' && item.estado !== 'ocupado'" class="badge bg-secondary">{{ item.estado }}</span>
-          </td>
-          <td>{{ item.tipo }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="mt-4">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered shadow-sm">
+        <thead class="table-dark text-center">
+          <tr>
+            <th>Placa</th>
+            <th>Color</th>
+            <th>Valor</th>
+            <th>Estado</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of vehiculos" class="text-center align-middle">
+            <td class="fw-bold text-uppercase">{{ item.placa }}</td>
+            <td class="text-capitalize">{{ item.color }}</td>
+            <td class="fw-semibold">$ {{ item.valorVehiculo | number }}</td>
+            <td>
+              <span *ngIf="item.estado === 'disponible'" class="badge bg-success">Disponible</span>
+              <span *ngIf="item.estado === 'ocupado'" class="badge bg-danger">Ocupado</span>
+              <span *ngIf="item.estado !== 'disponible' && item.estado !== 'ocupado'" class="badge bg-secondary">{{ item.estado }}</span>
+            </td>
+            <td class="text-capitalize">{{ item.tipo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

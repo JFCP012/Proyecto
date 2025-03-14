@@ -13,4 +13,7 @@ public interface alquilerRepositorio extends JpaRepository<alquiler,Long> {
 	@Query(value = "SELECT * FROM alquiler v WHERE v.estado_al = :estado",nativeQuery = true)
 	List<alquiler> findByEstadoAl(@Param("estado") String estado);
 
+	@Query(value = "SELECT * FROM alquiler v WHERE v.cedula = :cedula",nativeQuery = true)
+	List<alquiler> findbycedula(@Param("cedula")Long cedula);
+
 }
