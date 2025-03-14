@@ -1,26 +1,29 @@
-import { UsuarioService } from './../servicios/usuario.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../servicios/usuario.service';
+import { Vehiculos } from '../entidades/vehiculos';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Vehiculos } from '../entidades/vehiculos';
-import { VehiculosService } from '../servicios/vehiculos.service';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-usuario',
+  selector: 'app-disponibles',
   standalone: true,
   imports: [CommonModule,FormsModule],
-  templateUrl: './usuario.component.html',
-  styleUrl: './usuario.component.css'
+  templateUrl: './disponibles.component.html',
+  styleUrl: './disponibles.component.css'
 })
-export class UsuarioComponent {
- vehiculos: Vehiculos[];
+export class DisponiblesComponent implements OnInit {
+  vehiculos: Vehiculos[];
   tipo:string;
 
+
   constructor(private UsuarioService: UsuarioService,
-       private router: Router
+    private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.verDisponibles()
+  }
   verDisponibles() {
     this.UsuarioService.disponibles(this.tipo).subscribe(datos => {
       console.log('Datos recibidos:', datos);
@@ -33,9 +36,13 @@ export class UsuarioComponent {
       }
     });
   }
+
   abrirsesion(): void {
-    this.router.navigate(['./alquiler']);
+    this.router.navigate(['./alquileres']);
   }
-
-
+  volver():void{
+    this.router.navigate([`/vehiculos`])
+      }
     }
+
+    

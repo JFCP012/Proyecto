@@ -39,4 +39,7 @@ export class VehiculosComponent implements OnInit {
   abrirsesion(): void {
     this.router.navigate(['./alquileres']);
   }
+  abrirsesion2(): void {
+    this.router.navigate(['./listaDisponibles']);
+  }
 }
