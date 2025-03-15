@@ -32,11 +32,10 @@ verAlquiler(){
     console.log('Datos recibidos:', datos);
     this.Alquiler=datos;
     // Si `datos` no es un array, lo convertimos en uno
-    if (!Array.isArray(datos)) {
-      this.Alquiler = [datos]; // 🔹 Lo convertimos en un array
-    } else {
-      this.Alquiler = datos;
-    }
+    if (datos.length === 0) {
+      this.Alquiler = []; // Aseguramos que la variable sea un array vacío
+      alert("No hay alquileres relacionados a la cedula digitada");
+    } 
   });
 }
 
