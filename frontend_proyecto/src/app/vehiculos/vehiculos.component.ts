@@ -29,11 +29,14 @@ export class VehiculosComponent implements OnInit {
       next: (datos) => {
         console.log('Datos recibidos:', datos);
         this.alquiler = datos;
+  
+        if (datos.length === 0) { // ✅ Verificar si el array está vacío correctamente
+          alert("No hay autos en estado no entregado");
+        }
       },
       error: (err) => console.error('Error al obtener datos:', err) // ✅ Manejo de errores
     });
   }
-
 
 
   abrirsesion(): void {
