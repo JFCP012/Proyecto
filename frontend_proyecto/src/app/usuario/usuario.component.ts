@@ -25,12 +25,12 @@ export class UsuarioComponent {
     this.UsuarioService.disponibles(this.tipo).subscribe(datos => {
       console.log('Datos recibidos:', datos);
       
-      // Si `datos` no es un array, lo convertimos en uno
-      if (!Array.isArray(datos)) {
-        this.vehiculos = [datos]; // 🔹 Lo convertimos en un array
+      if (!Array.isArray(datos) || datos.length === 0) {
+        this.vehiculos = []; // Aseguramos que la variable sea un array vacío
+        alert("No hay vehiculos disponibles");
       } else {
         this.vehiculos = datos;
-      }
+      } 
     });
   }
   abrirsesion(): void {
