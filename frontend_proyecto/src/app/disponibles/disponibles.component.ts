@@ -25,17 +25,25 @@ export class DisponiblesComponent implements OnInit {
     this.verDisponibles()
   }
   verDisponibles() {
-    this.UsuarioService.disponibles(this.tipo).subscribe(datos => {
-      console.log('Datos recibidos:', datos);
-      
-      // Si `datos` no es un array, lo convertimos en uno
-      if (!Array.isArray(datos)) {
-        this.vehiculos = [datos]; // 🔹 Lo convertimos en un array
-      } else {
-        this.vehiculos = datos;
+    this.UsuarioService.disponibles(this.tipo).subscribe({
+      next: (datos) => {
+        console.log('Datos recibidos:', datos);
+  
+        // Verificamos si `datos` es un array y si tiene elementos
+        if (!Array.isArray(datos) || datos.length === 0) {
+          this.vehiculos = []; // Aseguramos que la variable sea un array vacío
+          alert("No hay vehiculos disponibles");
+        } else {
+          this.vehiculos = datos;
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener los datos:', error);
+        alert("Ocurrió un error al obtener los vehículos disponibles.");
       }
     });
   }
+  
 
   abrirsesion(): void {
     this.router.navigate(['./alquileres']);
