@@ -7,13 +7,23 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.example.demo.modelo.alquiler;
+import com.example.demo.modelo.loginAdmin;
+import com.example.demo.modelo.usuario;
+import com.example.demo.modelo.vehiculo;
 import com.example.demo.repositorio.alquilerRepositorio;
+import com.example.demo.repositorio.loginAdminRepositorio;
+import com.example.demo.repositorio.usuarioRepositorio;
+import com.example.demo.repositorio.vehiculoRepositorio;
 
 
 @RestController
@@ -23,6 +33,12 @@ public class alquilerControlador {
 	
 	@Autowired 
 	private alquilerRepositorio repositorio;
+	@Autowired 
+	private vehiculoRepositorio vehiculorepositorio;
+	@Autowired 
+	private usuarioRepositorio usuariorepositorio;
+	@Autowired 
+	private loginAdminRepositorio adminrepositorio;
 
 @GetMapping("/buscarNoEntregados")
 	public List<alquiler>buscarNoEntregados(){
@@ -117,6 +133,32 @@ public boolean actualizarAlquiler(@RequestParam(name = "id") Long id) {
         }
     }return encontrado;
     
+}
+@GetMapping("/registrar")
+public alquiler registrarAlquiler(
+        @RequestParam Long cedula,
+        @RequestParam String placa,
+        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
+        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaEnt,
+        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaD) {
+
+    usuario usuario = usuariorepositorio.findBycedula(cedula);
+    vehiculo vehiculo = vehiculorepositorio.findByplaca(placa);
+
+    if ("ocupado".equals(vehiculo.getEstado())) {
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "el vehiculo ya esta alquilado");
+    }
+    vehiculo.setEstado("ocupado");
+    vehiculorepositorio.save(vehiculo);
+
+    loginAdmin administrador = adminrepositorio.findById("1").get();
+    Long valorFinal = vehiculo.getValorVehiculo();
+
+    String estadoAl = "ocupado";
+    alquiler nuevoAlquiler = new alquiler(usuario, vehiculo, administrador, fecha, fechaEnt, fechaD, valorFinal, estadoAl);
+    repositorio.save(nuevoAlquiler);
+
+    return nuevoAlquiler;
 }
 
 }
