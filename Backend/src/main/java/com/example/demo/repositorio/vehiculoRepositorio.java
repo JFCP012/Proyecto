@@ -14,6 +14,12 @@ public interface vehiculoRepositorio extends JpaRepository<vehiculo,String> {
   @Query(value = "SELECT * FROM vehiculos v WHERE v.estado = :estado AND v.tipo = :tipo", nativeQuery = true)
 	    List<vehiculo> findByEstado(@Param("estado") String estado,@Param("tipo") String tipo);
 
+ 
+		public List<vehiculo> findByestado(String estado);
+		public vehiculo findByplaca(String placa);
+		public vehiculo findByvalorVehiculo(Long valorVehiculo);
 
+
+	
 	}
 

@@ -60,7 +60,7 @@ public class alquiler {
 	@Column(name ="estadoAl",length = 50 ,nullable=false)
 	private String estadoAl;
 
-	public alquiler() {
+	public alquiler(usuario usuario2, vehiculo vehiculo2, loginAdmin administrador, Date fecha2, Date fechaEnt2, Date fechaD2, Long valorFinal2, String estadoAl2) {
 		super();
 	}
 
