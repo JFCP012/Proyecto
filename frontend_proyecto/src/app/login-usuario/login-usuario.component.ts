@@ -23,7 +23,7 @@ export class LoginUsuarioComponent implements OnInit {
 
   constructor(
     private loginUsuarioService: LoginUsuarioService, 
-    private router: Router // Inyectar Router
+    private router: Router 
   ) {}
 
   ngOnInit(): void {

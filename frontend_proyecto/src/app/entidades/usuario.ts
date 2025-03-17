@@ -9,4 +9,9 @@ categoriaLi:string;
 vigenciaLi:Date;
 correo:string;
 telefono:number;
+
+    nombre2:string;
+
+    fechaEX:string;
+   
 }
