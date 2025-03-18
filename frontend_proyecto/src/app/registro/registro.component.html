@@ -1,1 +1,40 @@
-<h1>zero miedo</h1>
+
+
+<form >
+    <h2>registro de Usuario</h2>
+    <label for="nombre1">nombre1:</label>
+    <input type="text" id="nombre1" [(ngModel)]="Usuario.nombre1" name="nombre1" required>
+
+    <label for="nombre2">nombre2:</label>
+    <input type="text" id="nombre2" [(ngModel)]="Usuario.nombre2" name="nombre2" >
+
+    <label for="Apellido1">apellido1:</label>
+    <input type="text" id="Apellido1" [(ngModel)]="Usuario.apellido1" name="Apellido1" required>
+    
+    <label for="Apellido2">apellido2:</label>
+    <input type="text" id="Apellido2" [(ngModel)]="Usuario.apellido2" name="Apellido2" >
+
+    <label for="cedula">cedula:</label>
+    <input type="number" id="cedula" [(ngModel)]="Usuario.cedula" name="cedula" required>
+    
+    <label for="telefono">telefono:</label>
+    <input type="number" id="telefono" [(ngModel)]="Usuario.telefono" name="telefono" required>
+
+    <label for="correo">correo electronico:</label>
+    <input type="correo" id="correo" [(ngModel)]="Usuario.correo" name="correo" required>
+
+    <label for="categoriaLi">categoria licencia:</label>
+    <input type="text" id="categoriaLi" [(ngModel)]="Usuario.categoriaLi" name="categoriaLi" required> 
+    
+    <label for="fechaEX">fecha de expedicion:</label>
+    <input type="datetime-local" id="fechaEX" [(ngModel)]="Usuario.fechaEX" name="fechaEX" required>
+
+    <label for="vigenciaLi">vigencia licencia:</label>
+    <input type="datetime-local" id="vigenciaLi" [(ngModel)]="Usuario.vigenciaLi" name="vigenciaLi" required>
+
+    <label for="password">contraseña:</label>
+    <input type="password" id="clave" [(ngModel)]="login"name="clave" required>
+
+
+    <button type="button" (click)="guardarRegistro()">registrarse </button>
+</form>

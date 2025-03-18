@@ -41,47 +41,50 @@ public class alquilerControlador {
 	
 
 @GetMapping ("/actualizar")
-public List<Object>Actualizar(
+public boolean Actualizar(
 		@RequestParam("placa") String placa){
-	List<Object> alqA = new LinkedList <>();
 	List<alquiler> Ac = this.repositorio.findAll();
+	boolean encontrado = false;
 	for(int i=0;i<Ac.size();i++) {
 		String Placa=Ac.get(i).getVehiculo().getPlaca();
 		String estadO=Ac.get(i).getEstadoAl();
         if (Placa.equals(placa) && !estadO.equals("entregado"))  {
 			Ac.get(i).setEstadoAl("entregado");
 			this.repositorio.save(Ac.get(i));
-			return alqA;
-		}if (alqA.isEmpty()) {
-	        alqA.add("Error no se encuentran vehiculos con la placa: " +placa +" en estado no entregado");
-	}
+			encontrado=true;
+			break;
 		}
-	return alqA;
+        else {
+        	encontrado=false;
+        }
+		}
+	return encontrado;
 	}
 
 
 @GetMapping ("/cancelar")
-public List<Object> cancelar(
+public void cancelar(
 		@RequestParam (name = "id") Long id){
-	List<Object> alq = new LinkedList <>();
 	 List<alquiler> Ac = this.repositorio.findAll();
+	 boolean encontrado = false;
 		for(int i=0;i<Ac.size();i++) {
 			Long Id=Ac.get(i).getIdAl();
 			if(Id.equals(id)) {
 				Ac.get(i).getVehiculo().setEstado("disponible");
 				this.repositorio.save(Ac.get(i));
 				this.repositorio.deleteById(id);
-			}if (Ac.isEmpty()) {
-		        alq.add("No se encontro un alquiler con el id: " +id);
-			}
+				
+			} 
 				}
-			return alq;
+
+
 			}
 
 @GetMapping("/actualizarAlquiler")
-public void actualizarAlquiler(@RequestParam(name = "id") Long id) {
+public boolean actualizarAlquiler(@RequestParam(name = "id") Long id) {
     List<Object> alq = new LinkedList<>();
     List<alquiler> Ac = this.repositorio.findAll();
+    boolean encontrado = false;
 
     for(int i=0;i<Ac.size();i++) {
         if (Ac.get(i).getIdAl().equals(id)) {
@@ -106,10 +109,13 @@ public void actualizarAlquiler(@RequestParam(name = "id") Long id) {
             Ac.get(i).setValorFinal(valorTotal);
             // Guardar cambios
             this.repositorio.save(Ac.get(i));
+            encontrado=true;
 
            
+        }else {
+        	encontrado=false;
         }
-    }
+    }return encontrado;
     
 }
 

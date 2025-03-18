@@ -85,3 +85,28 @@
 
 </body>
 </html>
+
+
+
+<form (submit)="registrar()">
+  <label>cedula:</label>
+  <input type="number" [(ngModel)]="alquiler.cedula" name="cedula" required>
+  
+  <label>placa:</label>
+  <input type="text" [(ngModel)]="alquiler.placa" name="placa" required>
+  
+  <label>fecha:</label>
+  <input type="datetime-local" [(ngModel)]="alquiler.fecha" name="fecha" required>
+  
+  <label>fecha entrega:</label>
+  <input type="datetime-local" [(ngModel)]="alquiler.fechaEnt" name="fechaEnt" required>
+  
+  <label>fecha devolucion:</label>
+  <input type="datetime-local" [(ngModel)]="alquiler.fechaD" name="fechaD" required>
+  <p *ngIf="valorFinal">valor final: {{ valorFinal }}</p>
+  <p *ngIf="estadoAl">estado del alquiler: {{ estadoAl }}</p>
+  
+  <button type="submit">registrar</button>
+</form>
+
+

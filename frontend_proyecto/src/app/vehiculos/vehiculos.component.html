@@ -28,24 +28,19 @@
     <table class="table table-hover table-bordered shadow-lg rounded">
       <thead class="table-dark text-center">
         <tr>
-          <th># Alquiler</th>
-          <th>Valor Alquiler</th>          
-          <th>N° Identificación</th>
-          <th>Fecha Solicitud</th>
           <th>Placa</th>
-          <th>Estado auto</th>
-          <th>Estado alquiler</th>
+          <th>Color</th>
+          <th>Tipo</th>
+          <th>Valor vehiculo</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of alquiler" class="text-center align-middle table-light">
-          <td><strong>{{ item.idAl }}</strong></td>
-          <td class="text-success fw-bold">${{ item.valorFinal| number }}</td>
-          <td>{{ item.usuario.cedula }}</td>
-          <td>{{ item.fecha| date:'longDate' }}</td>
           <td class="fw-bold text-uppercase">{{ item.vehiculo.placa }}</td>
-          <td>{{item.vehiculo.estado}}</td>
-          <td>{{item.estadoAl}}</td>
+          <td>{{item.vehiculo.color}}</td>
+          <td>{{item.vehiculo.tipo}}</td>
+          <td class="text-success fw-bold">${{ item.vehiculo.valorVehiculo| number }}</td>
+
         </tr>
       </tbody>
     </table>

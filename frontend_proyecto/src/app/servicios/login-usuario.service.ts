@@ -16,4 +16,13 @@ export class LoginUsuarioService {
   ):Observable<any>{
     return this.httpClient.get(`http://localhost:8080/ver/loginUsuario/login?cedula2=${cedula}&clave2=${clave}`);
   }
+
+  guardarlogin(
+    Usuario:number,
+    login:string
+  ):Observable<any>{
+    return this.httpClient.get(`http://localhost:8080/ver/loginUsuario/almacenar?cedula=${Usuario}&clave=${login}`)
+    
+
+  }
 }

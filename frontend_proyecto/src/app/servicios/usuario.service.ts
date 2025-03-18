@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { Vehiculos } from '../entidades/vehiculos';
 import { Alquiler } from '../entidades/alquiler';
 
+
+import { Usuario } from '../entidades/usuario';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,4 +22,8 @@ export class UsuarioService {
     return this.httpClient.get<Alquiler[]>(`http://localhost:8080/ver/alquiler/buscarAl?cedula=${cedula}`)
   }
 
+  private bdURLG = "http://localhost:8080/ver/usuario/registrar"
+  registrarUsuario(usuario: Usuario):Observable<object>{
+    return this.httpClient.post(`${this.bdURLG}`,usuario);
+  }
 }

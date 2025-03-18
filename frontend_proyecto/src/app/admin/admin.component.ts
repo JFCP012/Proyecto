@@ -35,20 +35,29 @@ console.log(dato)
     this.vehiculosService.gestionar(placa).subscribe({
       next: (dato) => {
         console.log(dato);
-        window.location.reload() // ✅ En lugar de `window.location.reload()`, actualizamos la lista
+        if (dato === true) {  // Corrección: Usar comparación en lugar de asignación
+          this.buscarAlquilados();
+        } if(dato ===false) {
+          alert("El auto ya ha sido entregado");
+        }
       },
-      error: (err) => console.error('Error al actualizar:', err)
     });
   }
-
   actualizarAlquiler(id: number): void {
     this.vehiculosService.actualizarAlquiler(id).subscribe({
       next: (dato) => {
         console.log(dato);
-        window.location.reload() // ✅ Se actualiza la tabla sin recargar la página
+        if (dato === true) {  
+          this.buscarAlquilados();
+        } if(dato === false) {
+          alert("El auto ya esta disponible");
+        }
       },
+      
     });
   }
+  
+
   volver():void{
     this.router.navigate([`/vehiculos`])
       }

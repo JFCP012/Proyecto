@@ -14,4 +14,11 @@ export class AlquilerService {
   ):Observable<any>{
 return this.httpClient.get(`http://localhost:8080/ver/alquiler/cancelar?id=${id}`);
   }
+
+  private apiUrl = 'http://localhost:8080/ver/alquiler';
+
+
+  registrarAlquiler(datos: any): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/registrar`, datos);
+  }
 }

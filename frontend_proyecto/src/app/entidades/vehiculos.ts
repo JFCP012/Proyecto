@@ -4,5 +4,6 @@ export class Vehiculos {
     tipo:string;
     estado:string;
     valorVehiculo:number;
+
   }
   
