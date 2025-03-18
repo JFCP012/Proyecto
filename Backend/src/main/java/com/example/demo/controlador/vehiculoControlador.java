@@ -2,7 +2,6 @@ package com.example.demo.controlador;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.modelo.alquiler;
 import com.example.demo.modelo.vehiculo;
-import com.example.demo.repositorio.alquilerRepositorio;
 import com.example.demo.repositorio.vehiculoRepositorio;
 
 @RestController
