@@ -11,6 +11,9 @@ export class Alquiler {
     fechaD:Date;
     valorFinal:number;
     estadoAl:string;
+    cedula: number;
+    placa: String;
+   
 
     
 
